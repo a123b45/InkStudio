@@ -1,0 +1,17 @@
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: null
+global:
+  evaluation_interval: 15s
+  scrape_interval: 15s
+rule_files: null
+scrape_configs:
+- job_name: prometheus
+  static_configs:
+  - targets:
+    - 192.168.50.51:9090
+- job_name: worker-ef7adc32
+  static_configs:
+  - targets:
+    - 0.0.0.0:38059

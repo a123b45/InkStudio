@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+client/dist/
+server/dist/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local database data & binaries
+mongodb-data/
+mongodb/
+*.db
+
+
+# Uploads (keep folder structure if needed)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Cache
+.cache/
+.vite/
