@@ -715,11 +715,12 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(145deg, #dbeafe 0%, #eff6ff 50%, #f8fafc 100%);
 }
 .cover-placeholder span {
   font-size: 3rem;
-  opacity: 0.8;
+  color: #64748b;
+  opacity: 0.85;
 }
 
 .book-card-body {

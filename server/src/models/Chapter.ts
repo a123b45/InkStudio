@@ -6,6 +6,8 @@ export interface IChapter extends MongoDoc {
   volume: Types.ObjectId;
   author: Types.ObjectId;
   order: number;
+  summary: string;
+  deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -37,6 +39,16 @@ const chapterSchema = new Schema<IChapter>(
     order: {
       type: Number,
       default: 0,
+    },
+    summary: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
+      index: true,
     },
   },
   { timestamps: true }

@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Books from './pages/Books';
 import EditorPage from './pages/Editor';
+import ReaderPage from './pages/Reader';
 
 const Brand = ({ dark = false, size = 'md' }: { dark?: boolean; size?: 'sm' | 'md' | 'lg' }) => (
   <Link to="/" className={`brand${dark ? ' brand--dark' : ''}`}>
@@ -173,6 +174,14 @@ const AppContent = () => (
       element={
         <ProtectedRoute>
           <EditorPage />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/read/:id"
+      element={
+        <ProtectedRoute>
+          <ReaderPage />
         </ProtectedRoute>
       }
     />

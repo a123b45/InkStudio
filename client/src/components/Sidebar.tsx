@@ -95,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <aside className="sidebar">
         {/* Brand */}
         <div className="sidebar-brand">
-          <a href="/books" className="brand brand--dark">
+          <a href="/books" className="brand">
             <span className="brand-mark sm">墨</span>
             <span className="brand-text">
               <span className="brand-name">墨坊</span>

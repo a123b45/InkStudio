@@ -15,6 +15,7 @@ export interface IBook extends MongoDoc {
   content: any[];
   author: Types.ObjectId;
   isPublic: boolean;
+  deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -63,6 +64,11 @@ const bookSchema = new Schema<IBook>(
     isPublic: {
       type: Boolean,
       default: false,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
+      index: true,
     },
   },
   {

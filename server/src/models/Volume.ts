@@ -5,6 +5,7 @@ export interface IVolume extends MongoDoc {
   book: Types.ObjectId;
   author: Types.ObjectId;
   order: number;
+  deletedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,6 +33,11 @@ const volumeSchema = new Schema<IVolume>(
     order: {
       type: Number,
       default: 0,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
+      index: true,
     },
   },
   { timestamps: true }

@@ -3,7 +3,7 @@ import { createEditor, Descendant, Editor, Transforms, Text, Node, Range } from 
 import { Slate, Editable, withReact, useSlate, RenderElementProps, RenderLeafProps, ReactEditor } from 'slate-react';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey';
-import { Bold, Italic, Underline, Undo2, Redo2, Copy, Scissors, ClipboardPaste, SeparatorHorizontal, Brackets, RotateCcw, Search, ChevronUp, ChevronDown, X } from 'lucide-react';
+import { Bold, Italic, Underline, Undo2, Redo2, Copy, Scissors, ClipboardPaste, SeparatorHorizontal, Brackets, RotateCcw, Search, ChevronUp, ChevronDown, X, AlignLeft, AlignCenter, AlignRight } from 'lucide-react';
 
 /* ── Constants ── */
 const HOTKEYS: Record<string, string> = {
@@ -11,7 +11,6 @@ const HOTKEYS: Record<string, string> = {
   'mod+i': 'italic',
   'mod+u': 'underline',
 };
-const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 const FONT_FAMILIES = ['思源宋体', '黑体', '楷体', '仿宋', '微软雅黑', 'Arial', 'Times New Roman', 'Georgia'];
 const FONT_SIZES = ['12', '14', '16', '18', '20', '24', '28', '32', '36', '48'];
 const LINE_HEIGHTS = [
@@ -200,26 +199,18 @@ const ToolbarBtn = ({ active, onMouseDown, title, children }: {
   <button className={`toolbar-btn${active ? ' active' : ''}`} onMouseDown={onMouseDown} title={title}>{children}</button>
 );
 
-const HeadingBtn = ({ type, label, title }: { type: string; label: string; title: string }) => {
+const AlignBtn = ({ align, title, children }: { align: string; title: string; children: React.ReactNode }) => {
   const ed = useSlate();
-  let active = false;
-  for (const [node] of Editor.nodes(ed, { match: n => 'type' in n, mode: 'all' })) {
-    if ((node as any).type === type) { active = true; break; }
-  }
+  const current = getGlobalBlockProp(ed, 'align') || 'left';
   return (
     <ToolbarBtn
-      active={active}
+      active={current === align}
       onMouseDown={e => {
         e.preventDefault();
-        const newType = active ? 'paragraph' : type;
-        const saved = ed.selection;
-        for (const [node, path] of Editor.nodes(ed, { match: n => 'type' in n, mode: 'all' })) {
-          Transforms.setNodes(ed, { type: newType } as any, { at: path });
-        }
-        if (saved) Transforms.select(ed, saved);
+        applyBlockPropGlobally(ed, 'align', current === align ? undefined : align);
       }}
       title={title}
-    >{label}</ToolbarBtn>
+    >{children}</ToolbarBtn>
   );
 };
 
@@ -821,6 +812,12 @@ const SlateEditorComponent: React.FC<SlateEditorProps> = ({ value, onChange, pla
               <FontFamilySelect />
               <FontSizeSelect />
               <LineHeightSelect onLineHeightChange={handleLineHeightChange} />
+            </div>
+            <span className="toolbar-spacer" />
+            <div className="toolbar-group">
+              <AlignBtn align="left" title="左对齐"><AlignLeft size={16} /></AlignBtn>
+              <AlignBtn align="center" title="居中"><AlignCenter size={16} /></AlignBtn>
+              <AlignBtn align="right" title="右对齐"><AlignRight size={16} /></AlignBtn>
             </div>
             <span className="toolbar-spacer" />
             <div className="toolbar-group">

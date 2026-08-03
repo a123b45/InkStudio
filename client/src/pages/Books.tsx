@@ -3,11 +3,12 @@ import { useAuth } from '../contexts/AuthContext';
 import api from '../api';
 import Sidebar from '../components/Sidebar';
 import BookGrid from '../components/BookGrid';
-import { RefreshCw, Download, Plus } from 'lucide-react';
+import { RefreshCw, Download, Plus, Trash2 } from 'lucide-react';
 import NewBookModal from '../components/NewBookModal';
 import ImportBookModal from '../components/ImportBookModal';
 import NewGroupModal from '../components/NewGroupModal';
 import EditBookModal from '../components/EditBookModal';
+import TrashModal from '../components/TrashModal';
 
 interface Book {
   _id: string;
@@ -44,6 +45,7 @@ const Books = () => {
   const [showNewGroupModal, setShowNewGroupModal] = useState(false);
   const [editBookTarget, setEditBookTarget] = useState<Book | null>(null);
   const [syncing, setSyncing] = useState(false);
+  const [showTrash, setShowTrash] = useState(false);
 
   const fetchBooks = useCallback(async () => {
     try {
@@ -84,7 +86,7 @@ const Books = () => {
   };
 
   const handleDeleteBook = async (id: string) => {
-    if (!confirm('确定要删除这本书吗？')) return;
+    if (!confirm('确定要删除这本书吗？书籍将移入回收站，可在回收站中恢复。')) return;
     try {
       await api.delete(`/api/books/${id}`);
       setBooks(books.filter((b) => b._id !== id));
@@ -236,6 +238,13 @@ const Books = () => {
           <div className="toolbar-actions">
             <button
               className="btn"
+              onClick={() => setShowTrash(true)}
+              title="回收站"
+            >
+              <Trash2 size={16} /> 回收站
+            </button>
+            <button
+              className="btn"
               onClick={handleSync}
               disabled={syncing}
               title="同步书籍数据"
@@ -305,6 +314,12 @@ const Books = () => {
         onClose={() => setEditBookTarget(null)}
         onSaved={refreshAll}
         book={editBookTarget}
+      />
+
+      <TrashModal
+        isOpen={showTrash}
+        onClose={() => setShowTrash(false)}
+        onRestored={refreshAll}
       />
     </div>
   );
