@@ -10,8 +10,16 @@ cd "$DIR"
 if [[ ! -f .env ]]; then
   cp .env.example .env
   JWT="$(openssl rand -hex 32)"
+  ME_PASS="$(openssl rand -hex 12)"
   sed -i "s|^JWT_SECRET=.*|JWT_SECRET=${JWT}|" .env
-  echo "[ok] 已创建 deploy/.env 并生成 JWT_SECRET"
+  sed -i "s|^MONGO_EXPRESS_PASSWORD=.*|MONGO_EXPRESS_PASSWORD=${ME_PASS}|" .env
+  echo "[ok] 已创建 deploy/.env 并生成 JWT_SECRET / MONGO_EXPRESS_PASSWORD"
+fi
+
+if grep -q '^MONGO_EXPRESS_PASSWORD=$' .env 2>/dev/null; then
+  ME_PASS="$(openssl rand -hex 12)"
+  sed -i "s|^MONGO_EXPRESS_PASSWORD=.*|MONGO_EXPRESS_PASSWORD=${ME_PASS}|" .env
+  echo "[ok] 已生成 MONGO_EXPRESS_PASSWORD"
 fi
 
 DEPLOY_HOST="$(grep '^DEPLOY_HOST=' .env | cut -d= -f2- | tr -d '\r' || true)"
@@ -38,6 +46,7 @@ echo "=========================================="
 echo "  墨坊 InkStudio 已启动"
 echo "  Web:  http://${DEPLOY_HOST}:8080"
 echo "  API:  http://${DEPLOY_HOST}:5000"
+echo "  Mongo: http://${DEPLOY_HOST}:8081  (用户见 deploy/.env 中 MONGO_EXPRESS_*)"
 echo "  健康: curl http://${DEPLOY_HOST}:5000/api/health"
 echo "=========================================="
 echo ""
