@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import EditProfileModal from './EditProfileModal';
 import BookContextMenu from './BookContextMenu';
 import { ChevronRight, Plus, Tag, FolderOpen, Search, List, BookOpen, Pencil, LogOut } from 'lucide-react';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 interface Book {
   _id: string;
@@ -112,7 +113,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             title="点击查看选项"
           >
             {user?.avatar ? (
-              <img src={user.avatar} alt={user.username} />
+              <img src={resolveAssetUrl(user.avatar)} alt={user.username} />
             ) : (
               <div className="avatar-placeholder">
                 {user?.username?.charAt(0).toUpperCase() || 'U'}

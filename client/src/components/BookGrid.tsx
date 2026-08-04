@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BookContextMenu from './BookContextMenu';
 import { Library, BookOpen, ChevronRight } from 'lucide-react';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 interface Book {
   _id: string;
@@ -80,7 +81,7 @@ const BookGrid: React.FC<BookGridProps> = ({
             {/* Cover */}
             <div className="book-card-cover">
               {book.cover ? (
-                <img src={book.cover} alt={book.title} />
+                <img src={resolveAssetUrl(book.cover)} alt={book.title} />
               ) : (
                 <div className="cover-placeholder">
                   <span><BookOpen size={24} /></span>

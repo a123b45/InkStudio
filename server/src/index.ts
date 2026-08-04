@@ -17,7 +17,42 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+const defaultOrigins = [
+  'http://localhost:5173',
+  'https://inkstudio.work',
+  'https://www.inkstudio.work',
+  'capacitor://localhost',
+  'https://localhost',
+  'http://localhost',
+];
+
+const deployHost = process.env.DEPLOY_HOST?.trim();
+if (deployHost) {
+  for (const port of ['', ':8080', ':5000', ':5173']) {
+    defaultOrigins.push(`http://${deployHost}${port}`);
+  }
+}
+
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map((s) => s.trim()).filter(Boolean)
+  : defaultOrigins;
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      if (allowedOrigins.includes(origin) || origin.startsWith('capacitor://')) {
+        callback(null, origin);
+        return;
+      }
+      callback(new Error(`CORS blocked: ${origin}`));
+    },
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: '10mb' }));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 

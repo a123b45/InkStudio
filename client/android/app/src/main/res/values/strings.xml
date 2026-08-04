@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">墨坊 InkStudio</string>
+    <string name="title_activity_main">墨坊 InkStudio</string>
+    <string name="package_name">work.inkstudio.app</string>
+    <string name="custom_url_scheme">work.inkstudio.app</string>
+</resources>

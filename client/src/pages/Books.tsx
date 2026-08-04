@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../api';
 import Sidebar from '../components/Sidebar';
@@ -32,6 +34,7 @@ interface Group {
 
 const Books = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [books, setBooks] = useState<Book[]>([]);
   const [groups, setGroups] = useState<Group[]>([]);
   const [loading, setLoading] = useState(true);
@@ -82,7 +85,11 @@ const Books = () => {
 
   const handleSelectBook = (id: string) => {
     setSelectedBookId(id);
-    window.open(`/editor/${id}`, '_blank');
+    if (Capacitor.isNativePlatform()) {
+      navigate(`/editor/${id}`);
+    } else {
+      window.open(`/editor/${id}`, '_blank');
+    }
   };
 
   const handleDeleteBook = async (id: string) => {

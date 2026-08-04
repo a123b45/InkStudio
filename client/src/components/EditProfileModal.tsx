@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { X, Camera, Mars, Venus, User } from 'lucide-react';
 import api from '../api';
 import { useAuth } from '../contexts/AuthContext';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -124,7 +125,10 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose }) 
                 onClick={() => fileInputRef.current?.click()}
               >
                 {avatarPreview ? (
-                  <img src={avatarPreview} alt="头像预览" />
+                  <img
+                    src={avatarPreview.startsWith('data:') ? avatarPreview : resolveAssetUrl(avatarPreview)}
+                    alt="头像预览"
+                  />
                 ) : (
                   <div className="avatar-placeholder large">
                     {username?.charAt(0).toUpperCase() || 'U'}
