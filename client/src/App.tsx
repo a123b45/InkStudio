@@ -23,7 +23,7 @@ const Brand = ({ dark = false, size = 'md' }: { dark?: boolean; size?: 'sm' | 'm
     <span className={`brand-mark${size === 'sm' ? ' sm' : size === 'lg' ? ' lg' : ''}`}>墨</span>
     <span className="brand-text">
       <span className="brand-name">墨坊 InkStudio</span>
-      <span className="brand-tagline">Enterprise Writing</span>
+      <span className="brand-tagline">个人作者写作</span>
     </span>
   </Link>
 );
@@ -69,7 +69,7 @@ const Home = () => {
             专注创作，<em>专业码字</em>
           </h1>
           <p className="landing-hero-desc">
-            墨坊 InkStudio 为企业与个人作者提供结构化写作环境——
+            墨坊 InkStudio 为个人作者提供结构化写作环境——
             卷章管理、富文本编辑、写作插件与云端同步，让长篇创作井然有序。
           </p>
           <div className="landing-hero-actions">
@@ -142,7 +142,7 @@ const Home = () => {
           </div>
           <div className="landing-feature-card">
             <div className="landing-feature-icon"><Shield size={22} /></div>
-            <h3>企业级数据隔离</h3>
+            <h3>私人书库</h3>
             <p>JWT 身份认证，按用户隔离数据，每本书仅作者本人可访问与编辑</p>
           </div>
         </div>
@@ -150,7 +150,7 @@ const Home = () => {
 
       <footer className="landing-footer">
         <FileText size={14} style={{ verticalAlign: 'middle', marginRight: 6 }} />
-        墨坊 InkStudio Enterprise · 专注小说创作的专业平台
+        墨坊 InkStudio · 专注小说创作的个人写作平台
       </footer>
     </div>
   );

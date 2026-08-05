@@ -31,7 +31,7 @@ const Login = () => {
           <span className="brand-mark lg">墨</span>
           <h2 className="auth-brand-title">墨坊 InkStudio</h2>
           <p className="auth-brand-desc">
-            企业级小说创作平台，为作者提供专业的卷章管理与沉浸式码字体验。
+            个人小说创作平台，为作者提供专业的卷章管理与沉浸式码字体验。
           </p>
           <ul className="auth-features-list">
             <li>
