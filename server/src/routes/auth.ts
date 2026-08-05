@@ -58,12 +58,15 @@ router.post(
 
 /**
  * POST /api/auth/login
- * Log in with email and password.
+ * Log in with email or username and password.
  */
 router.post(
   '/login',
   [
-    body('email').isEmail().withMessage('Please enter a valid email'),
+    body('login')
+      .trim()
+      .notEmpty()
+      .withMessage('请输入邮箱或用户名'),
     body('password').notEmpty().withMessage('Password is required'),
   ],
   async (req: Request, res: Response): Promise<void> => {
@@ -74,18 +77,20 @@ router.post(
     }
 
     try {
-      const { email, password } = req.body;
-
-      // Find user and explicitly select password
-      const user = await User.findOne({ email }).select('+password');
+      const { login, password } = req.body as { login: string; password: string };
+      const trimmed = login.trim();
+      const isEmail = /^\S+@\S+\.\S+$/.test(trimmed);
+      const user = await User.findOne(
+        isEmail ? { email: trimmed.toLowerCase() } : { username: trimmed }
+      ).select('+password');
       if (!user) {
-        res.status(401).json({ message: 'Invalid email or password' });
+        res.status(401).json({ message: '邮箱/用户名或密码错误' });
         return;
       }
 
       const isMatch = await user.matchPassword(password);
       if (!isMatch) {
-        res.status(401).json({ message: 'Invalid email or password' });
+        res.status(401).json({ message: '邮箱/用户名或密码错误' });
         return;
       }
 

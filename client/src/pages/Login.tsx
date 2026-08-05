@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Layers, PenLine, Shield } from 'lucide-react';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
+      await login(loginId, password);
       navigate('/books');
     } catch (err: any) {
       setError(err.response?.data?.message || '登录失败');
@@ -62,14 +62,14 @@ const Login = () => {
           </div>
           {error && <div className="error-msg">{error}</div>}
           <form onSubmit={handleSubmit}>
-            <label>邮箱</label>
+            <label>邮箱或用户名</label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              value={loginId}
+              onChange={(e) => setLoginId(e.target.value)}
               required
-              placeholder="name@company.com"
-              autoComplete="email"
+              placeholder="邮箱或用户名"
+              autoComplete="username"
             />
             <label>密码</label>
             <input
