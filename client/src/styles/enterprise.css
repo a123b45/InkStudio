@@ -1269,7 +1269,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
   background: var(--paper);
   border: none;
   box-shadow: none;
@@ -1311,6 +1313,9 @@ body {
   padding: 6px 32px;
   gap: 4px;
   flex-shrink: 0;
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .toolbar-btn {
@@ -1354,8 +1359,18 @@ body {
   padding: 24px 32px 48px;
   border: none;
   box-shadow: none;
+  overflow-x: hidden;
   overflow-y: auto;
   min-height: 0;
+  min-width: 0;
+}
+
+/* Slate 空编辑器 placeholder 默认 nowrap，会撑出横向滚动条 */
+.editable [data-slate-placeholder],
+[data-slate-placeholder] {
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-break: break-word;
 }
 
 .editable p {

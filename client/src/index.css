@@ -2122,6 +2122,7 @@ body {
   position: relative;
   padding: 24px 32px 48px;
   flex: 1;
+  overflow-x: hidden;
   overflow-y: auto;
   font-family: 'Noto Serif SC', 'Source Han Serif SC', 'PingFang SC', 'Microsoft YaHei', serif;
   font-size: 17px;
@@ -2131,6 +2132,7 @@ body {
   background: #faf8f5;
   color: #3d3835;
   min-height: 0;
+  min-width: 0;
 }
 .editable h1 {
   font-size: 1.5rem;
@@ -2176,6 +2178,9 @@ body {
   color: var(--text-muted);
   opacity: 0.5;
   font-style: italic;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-break: break-word;
 }
 
 /* Dark background mode — text auto-white */
