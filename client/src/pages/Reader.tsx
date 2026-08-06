@@ -83,6 +83,13 @@ const ReaderPage = () => {
   return (
     <div className={`reader-page${dark ? ' reader-dark' : ''}`}>
       <header className="reader-header">
+        <Link to="/" className="brand brand--topbar" title="返回首页">
+          <span className="brand-mark sm">墨</span>
+          <span className="brand-text">
+            <span className="brand-name">墨坊</span>
+            <span className="brand-tagline">InkStudio</span>
+          </span>
+        </Link>
         <Link to={`/editor/${bookId}`} className="btn btn-sm btn-ghost">
           <ChevronLeft size={16} /> 返回编辑
         </Link>

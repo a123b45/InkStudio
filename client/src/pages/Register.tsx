@@ -29,8 +29,10 @@ const Register = () => {
     <div className="auth-page">
       <div className="auth-brand-panel">
         <div className="auth-brand-content">
-          <span className="brand-mark lg">墨</span>
-          <h2 className="auth-brand-title">开启创作之旅</h2>
+          <Link to="/" className="brand-home-link" title="返回首页">
+            <span className="brand-mark lg">墨</span>
+            <h2 className="auth-brand-title">开启创作之旅</h2>
+          </Link>
           <p className="auth-brand-desc">
             注册墨坊账号，免费使用全部写作功能——从第一本书到百万字长篇，我们与你同行。
           </p>
@@ -54,8 +56,10 @@ const Register = () => {
       <div className="auth-form-panel">
         <div className="auth-card">
           <div className="auth-mobile-brand">
-            <span className="brand-mark sm">墨</span>
-            <span>墨坊 InkStudio</span>
+            <Link to="/" title="返回首页">
+              <span className="brand-mark sm">墨</span>
+              <span>墨坊 InkStudio</span>
+            </Link>
           </div>
           <div className="auth-card-header">
             <h1>创建账号</h1>

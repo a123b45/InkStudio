@@ -255,6 +255,14 @@ const EditorPage = () => {
     <div className="editor-full-layout">
       <header className="app-topbar">
         <div className="app-topbar-left">
+          <Link to="/" className="brand brand--topbar" title="返回首页">
+            <span className="brand-mark sm">墨</span>
+            <span className="brand-text">
+              <span className="brand-name">墨坊</span>
+              <span className="brand-tagline">InkStudio</span>
+            </span>
+          </Link>
+          <span className="app-topbar-divider" />
           <Link to="/books" className="btn btn-sm btn-ghost" title="返回书库"><ChevronLeft size={18} /> 书库</Link>
           <span className="app-topbar-divider" />
           <BookOpen size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />

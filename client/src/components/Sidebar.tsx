@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import EditProfileModal from './EditProfileModal';
 import BookContextMenu from './BookContextMenu';
@@ -96,13 +97,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       <aside className="sidebar">
         {/* Brand */}
         <div className="sidebar-brand">
-          <a href="/books" className="brand">
+          <Link to="/" className="brand" title="返回首页">
             <span className="brand-mark sm">墨</span>
             <span className="brand-text">
               <span className="brand-name">墨坊</span>
               <span className="brand-tagline">InkStudio</span>
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* User avatar and name area */}

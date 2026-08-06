@@ -28,8 +28,10 @@ const Login = () => {
     <div className="auth-page">
       <div className="auth-brand-panel">
         <div className="auth-brand-content">
-          <span className="brand-mark lg">墨</span>
-          <h2 className="auth-brand-title">墨坊 InkStudio</h2>
+          <Link to="/" className="brand-home-link" title="返回首页">
+            <span className="brand-mark lg">墨</span>
+            <h2 className="auth-brand-title">墨坊 InkStudio</h2>
+          </Link>
           <p className="auth-brand-desc">
             个人小说创作平台，为作者提供专业的卷章管理与沉浸式码字体验。
           </p>
@@ -53,8 +55,10 @@ const Login = () => {
       <div className="auth-form-panel">
         <div className="auth-card">
           <div className="auth-mobile-brand">
-            <span className="brand-mark sm">墨</span>
-            <span>墨坊 InkStudio</span>
+            <Link to="/" title="返回首页">
+              <span className="brand-mark sm">墨</span>
+              <span>墨坊 InkStudio</span>
+            </Link>
           </div>
           <div className="auth-card-header">
             <h1>欢迎回来</h1>
