@@ -1,5 +1,7 @@
-# 墨坊 InkStudio — Rocky Linux 一键部署
-# 用法：cd deploy && ./start.sh
+# 墨坊 InkStudio — Ubuntu Server 一键部署
+# 用法：
+#   sudo ./install-docker.sh   # 仅首次，未装 Docker 时
+#   ./start.sh
 
 services:
   mongo:
